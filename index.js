@@ -14,7 +14,7 @@ app.use(express.json());
 // Use this for parsing URL-encoded form data (key=value&key2=value2)
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/book",bookRoutes)
+app.use("/api/book",bookRoutes);
 
 
 app.listen(PORT , ()=>{
