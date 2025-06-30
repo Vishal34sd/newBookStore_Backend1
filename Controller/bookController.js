@@ -56,8 +56,33 @@ const searchBook = async(req,res)=>{
     }
 }
 
+const getBook = async(req,res)=>{
+    try{
+        const currentBookId = req.params.id ;
+        const bookDetail = await Book1.findById(currentBookId);
+        
+        if(bookDetail ){
+            res.status(200).json({
+                success : true ,
+                message : "Book fetched",
+                data : bookDetail
+            });
+        }
+        else{
+            res.status(404).json({
+                success : false ,
+                message : "Book not found "
+            }) ;
+        }
+
+    }
+    catch(err){
+        console.log("Internal Server eroor : ", err);
+    }
+}
 
 
 
 
-export {fetchAllBooks, searchBook};
+
+export {fetchAllBooks, searchBook , getBook};
