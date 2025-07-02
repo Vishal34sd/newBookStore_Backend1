@@ -3,6 +3,8 @@ import Cart from "../Model/Cart.js";
 const addToCart = async (req, res) => {
     try {
         const { userId, bookId, quantity } = req.body;
+        const qty = parseInt(quantity) || 1;
+
         let cart = await Cart.findOne({ user : userId }); // Use 'user' field as per schema
 
         if (!cart) {
@@ -19,12 +21,12 @@ const addToCart = async (req, res) => {
 
         if (itemIndex > -1) {
             // If item exists, increment quantity by requested amount
-            cart.items[itemIndex].quantity += quantity;
+            cart.items[itemIndex].quantity += qty;
         } else {
             // Add new item to cart
             cart.items.push({
                 book: bookId,
-                quantity: quantity
+                quantity: qty
             });
         }
 

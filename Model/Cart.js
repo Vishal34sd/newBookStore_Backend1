@@ -20,7 +20,6 @@ const cartSchema = new mongoose.Schema({
     items : [cartItemSchema]
 });
 
-const cartItemModel = mongoose.model("CartItem", cartItemSchema);
 const cartModel = mongoose.model("Cart", cartSchema);
 
 
