@@ -31,7 +31,7 @@ const addToCart = async (req, res) => {
         }
 
         await cart.save();
-        console.log(cart);
+        
 
         res.status(200).json({
             success: true,
@@ -48,4 +48,33 @@ const addToCart = async (req, res) => {
     }
 }
 
-export { addToCart };
+const showCart = async(req, res)=>{
+    try{
+        const userId = req.params.userId; 
+        
+        const allCartItem = await Cart.findOne({user:userId}).populate("items.book");
+
+        
+        if(!allCartItem){
+            return res.status(400).json({ 
+                success : false , 
+                message : "Cannot show the cart "
+            });
+        }
+
+        return res.status(200).json({
+            success : true ,
+            message : "All cart data fetched successfully ",
+            data : allCartItem
+        })
+
+    }
+    catch(err){
+        res.status(500).json({
+            success : false ,
+            message : "Internal server error " // Fix typo
+        })
+    }
+}
+
+export { addToCart , showCart};
