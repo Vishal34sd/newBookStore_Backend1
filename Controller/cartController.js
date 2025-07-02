@@ -77,4 +77,40 @@ const showCart = async(req, res)=>{
     }
 }
 
-export { addToCart , showCart};
+const deleteItem = async (req, res) => {
+    try {
+        const { userId, bookId } = req.body;
+        const newBookId = bookId.trim();
+
+        const userCart = await Cart.findOne({ user: userId });
+
+        if (!userCart) {
+            return res.status(404).json({
+                success: false,
+                message: "Cart not found"
+            });
+        }
+
+        // Filter out the item with matching bookId
+        const newItems = userCart.items.filter(item => item.book.toString() !== newBookId);
+        userCart.items = newItems;
+
+        await userCart.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Item deleted from cart successfully",
+            data: userCart
+        });
+
+    } catch (err) {
+        console.error("Error deleting cart item:", err);
+        res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
+    }
+};
+
+
+export { addToCart , showCart, deleteItem};
