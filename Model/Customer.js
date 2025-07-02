@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose";
 
-const customerSchema = mongoose.Schema({
+const customerSchema = new  mongoose.Schema({
     username :{
         type:String,
         required : true ,
