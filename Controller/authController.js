@@ -89,4 +89,18 @@ const customerLogin = async(req, res)=>{
     }
 }
 
+
+// const changePassword = async (req , res)=>{
+//     try{
+//         const 
+//     }
+//     catch(err){
+//         console.error(err);
+//         res.status(500).json({
+//             success : false ,
+//             message : "Internal Server Error "
+//         });
+//     }
+// }
+
 export { customerRegister , customerLogin};
