@@ -5,7 +5,7 @@ const placedOrder = async(req, res)=>{
     try{
         const userId = req.userInfo.userId;
         const cart = await Cart.findOne({user:userId}).populate("items.bookId");
-        if(!cart && !cart.items.length===0 ){
+        if(!cart || cart.items.length===0 ){
             return res.status(404).json({
                 success : false ,
                 message : "Cart is empty "
@@ -34,7 +34,7 @@ const placedOrder = async(req, res)=>{
             success : true ,
             message : "Order placed successfully"
         });
-        console.log(newOrder);
+        
     }
     catch(err){
         console.log(err);
