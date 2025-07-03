@@ -5,6 +5,7 @@ import bookRoutes from "./Routes/bookRoute.js";
 import customerRoutes from "./Routes/customerRoutes.js";
 import cartRoutes from "./Routes/cartRoute.js";
 import adminRoutes from "./Routes/adminRoutes.js";
+import orderRoutes from "./Routes/orderRoutes.js";
 import connectToDB from "./Database/db.js";
 dotenv.config();
 const PORT = process.env.PORT ;
@@ -21,6 +22,7 @@ app.use("/api/book",bookRoutes);
 app.use("/api/customer", customerRoutes);
 app.use("/api/cart",cartRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/order",orderRoutes);
 
 
 app.listen(PORT , ()=>{

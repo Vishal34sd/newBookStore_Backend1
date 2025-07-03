@@ -5,10 +5,16 @@ const orderSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId, 
         ref : "Customer"
     },
-    bookId : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "Book1"
-    },
+    items : [{
+        bookId : {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Book1"
+        },
+        quantity : {
+            type : Number ,
+            required : true
+        }
+    }],
     totalPrice : {
         type : Number ,
         required : true

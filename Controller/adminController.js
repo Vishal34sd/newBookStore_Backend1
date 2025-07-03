@@ -2,9 +2,9 @@ import Book1 from "../Model/Book.js";
 
 const addBookData = async(req, res)=>{
     try{
-        const {title ,author , category  } = req.body ;
+        const {title ,author , category , price } = req.body ;
         const newBook =  new Book1({
-            title , author , category
+            title , author , category, price
         });
         const newData = await newBook.save();
         if(!newData){

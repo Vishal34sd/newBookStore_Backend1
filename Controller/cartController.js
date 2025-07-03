@@ -16,7 +16,7 @@ const addToCart = async (req, res) => {
 
         // Find index of the item in the cart
         const itemIndex = cart.items.findIndex(
-            (item) => item.book.toString() === bookId
+            (item) => item.bookId && item.bookId.toString() === bookId
         );
 
         if (itemIndex > -1) {
@@ -25,7 +25,7 @@ const addToCart = async (req, res) => {
         } else {
             // Add new item to cart
             cart.items.push({
-                book: bookId,
+                bookId: bookId,
                 quantity: qty
             });
         }
@@ -92,7 +92,7 @@ const deleteItem = async (req, res) => {
         }
 
         // Filter out the item with matching bookId
-        const newItems = userCart.items.filter(item => item.book.toString() !== newBookId);
+        const newItems = userCart.items.filter(item => item.bookId.toString() !== newBookId);
         userCart.items = newItems;
 
         await userCart.save();
