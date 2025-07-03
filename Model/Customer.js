@@ -24,7 +24,7 @@ const customerSchema = new  mongoose.Schema({
         default : "user",
         
     }
-}, {timeStamp:true});
+}, {timestamp:true});
 
 const customerModel = mongoose.model("Customer", customerSchema);
 export default customerModel ; 
