@@ -47,8 +47,8 @@ const customerRegister = async (req, res) => {
 
 const customerLogin = async(req, res)=>{
     try{
-        const {username, password} = req.body;
-        const customerExist = await Customer.findOne({username});
+        const {email, password} = req.body;
+        const customerExist = await Customer.findOne({email});
         if(!customerExist){
             res.status(400).json({
                 success : false ,
@@ -64,6 +64,7 @@ const customerLogin = async(req, res)=>{
         }
         const accessToken = jwt.sign({
             userId: customerExist._id,
+            email : customerExist.email,
             username: customerExist.username,
             role: customerExist.role
         }, process.env.JWT_SECRET_KEY, { expiresIn: '30m' });
