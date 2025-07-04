@@ -1,6 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Customer from "../Model/Customer.js";
+import { sendOtp } from "./otpController.js";
+import { otpGenerator, sendEmail } from "../Nodemailer Config/nodeMailerConfig.js";
+
+ 
 
 const customerRegister = async (req, res) => {
     try {
@@ -74,6 +78,8 @@ const customerLogin = async(req, res)=>{
                 message : "Customer logged in successfully",
                 token : accessToken
             });
+            
+            sendOtp(email);
         }else{
             res.status(401).json({
                 success : false , 
